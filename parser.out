@@ -1,0 +1,554 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> name
+Rule 2     exp -> name LPAREN actuals RPAREN
+Rule 3     exp -> TURN LPAREN exp RPAREN
+Rule 4     exp -> SEW LPAREN exp COMMA exp RPAREN
+Rule 5     exp -> LET decls IN exp END
+Rule 6     actuals -> exp
+Rule 7     actuals -> exp COMMA actuals
+Rule 8     decls -> decl
+Rule 9     decls -> decl decls
+Rule 10    decl -> FUN name LPAREN formals RPAREN EQUAL exp
+Rule 11    decl -> VAL name EQUAL exp
+Rule 12    formals -> name
+Rule 13    formals -> name COMMA formals
+Rule 14    name -> CHARS
+Rule 15    name -> name CHARS
+
+Terminals, with rules where they appear
+
+CHARS                : 14 15
+COMMA                : 4 7 13
+END                  : 5
+EQUAL                : 10 11
+FUN                  : 10
+IN                   : 5
+LET                  : 5
+LPAREN               : 2 3 4 10
+RPAREN               : 2 3 4 10
+SEW                  : 4
+TURN                 : 3
+VAL                  : 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+actuals              : 2 7
+decl                 : 8 9
+decls                : 5 9
+exp                  : 3 4 4 5 6 7 10 11 0
+formals              : 10 13
+name                 : 1 2 10 11 12 13 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 1
+    name                           shift and go to state 2
+
+state 1
+
+    (0) S' -> exp .
+
+
+
+state 2
+
+    (1) exp -> name .
+    (2) exp -> name . LPAREN actuals RPAREN
+    (15) name -> name . CHARS
+
+    $end            reduce using rule 1 (exp -> name .)
+    COMMA           reduce using rule 1 (exp -> name .)
+    RPAREN          reduce using rule 1 (exp -> name .)
+    END             reduce using rule 1 (exp -> name .)
+    FUN             reduce using rule 1 (exp -> name .)
+    VAL             reduce using rule 1 (exp -> name .)
+    IN              reduce using rule 1 (exp -> name .)
+    LPAREN          shift and go to state 7
+    CHARS           shift and go to state 8
+
+
+state 3
+
+    (3) exp -> TURN . LPAREN exp RPAREN
+
+    LPAREN          shift and go to state 9
+
+
+state 4
+
+    (4) exp -> SEW . LPAREN exp COMMA exp RPAREN
+
+    LPAREN          shift and go to state 10
+
+
+state 5
+
+    (5) exp -> LET . decls IN exp END
+    (8) decls -> . decl
+    (9) decls -> . decl decls
+    (10) decl -> . FUN name LPAREN formals RPAREN EQUAL exp
+    (11) decl -> . VAL name EQUAL exp
+
+    FUN             shift and go to state 13
+    VAL             shift and go to state 14
+
+    decls                          shift and go to state 11
+    decl                           shift and go to state 12
+
+state 6
+
+    (14) name -> CHARS .
+
+    LPAREN          reduce using rule 14 (name -> CHARS .)
+    CHARS           reduce using rule 14 (name -> CHARS .)
+    $end            reduce using rule 14 (name -> CHARS .)
+    COMMA           reduce using rule 14 (name -> CHARS .)
+    RPAREN          reduce using rule 14 (name -> CHARS .)
+    EQUAL           reduce using rule 14 (name -> CHARS .)
+    END             reduce using rule 14 (name -> CHARS .)
+    FUN             reduce using rule 14 (name -> CHARS .)
+    VAL             reduce using rule 14 (name -> CHARS .)
+    IN              reduce using rule 14 (name -> CHARS .)
+
+
+state 7
+
+    (2) exp -> name LPAREN . actuals RPAREN
+    (6) actuals -> . exp
+    (7) actuals -> . exp COMMA actuals
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 2
+    actuals                        shift and go to state 15
+    exp                            shift and go to state 16
+
+state 8
+
+    (15) name -> name CHARS .
+
+    LPAREN          reduce using rule 15 (name -> name CHARS .)
+    CHARS           reduce using rule 15 (name -> name CHARS .)
+    $end            reduce using rule 15 (name -> name CHARS .)
+    COMMA           reduce using rule 15 (name -> name CHARS .)
+    RPAREN          reduce using rule 15 (name -> name CHARS .)
+    EQUAL           reduce using rule 15 (name -> name CHARS .)
+    END             reduce using rule 15 (name -> name CHARS .)
+    FUN             reduce using rule 15 (name -> name CHARS .)
+    VAL             reduce using rule 15 (name -> name CHARS .)
+    IN              reduce using rule 15 (name -> name CHARS .)
+
+
+state 9
+
+    (3) exp -> TURN LPAREN . exp RPAREN
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 17
+    name                           shift and go to state 2
+
+state 10
+
+    (4) exp -> SEW LPAREN . exp COMMA exp RPAREN
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 18
+    name                           shift and go to state 2
+
+state 11
+
+    (5) exp -> LET decls . IN exp END
+
+    IN              shift and go to state 19
+
+
+state 12
+
+    (8) decls -> decl .
+    (9) decls -> decl . decls
+    (8) decls -> . decl
+    (9) decls -> . decl decls
+    (10) decl -> . FUN name LPAREN formals RPAREN EQUAL exp
+    (11) decl -> . VAL name EQUAL exp
+
+    IN              reduce using rule 8 (decls -> decl .)
+    FUN             shift and go to state 13
+    VAL             shift and go to state 14
+
+    decl                           shift and go to state 12
+    decls                          shift and go to state 20
+
+state 13
+
+    (10) decl -> FUN . name LPAREN formals RPAREN EQUAL exp
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 21
+
+state 14
+
+    (11) decl -> VAL . name EQUAL exp
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 22
+
+state 15
+
+    (2) exp -> name LPAREN actuals . RPAREN
+
+    RPAREN          shift and go to state 23
+
+
+state 16
+
+    (6) actuals -> exp .
+    (7) actuals -> exp . COMMA actuals
+
+    RPAREN          reduce using rule 6 (actuals -> exp .)
+    COMMA           shift and go to state 24
+
+
+state 17
+
+    (3) exp -> TURN LPAREN exp . RPAREN
+
+    RPAREN          shift and go to state 25
+
+
+state 18
+
+    (4) exp -> SEW LPAREN exp . COMMA exp RPAREN
+
+    COMMA           shift and go to state 26
+
+
+state 19
+
+    (5) exp -> LET decls IN . exp END
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 27
+    name                           shift and go to state 2
+
+state 20
+
+    (9) decls -> decl decls .
+
+    IN              reduce using rule 9 (decls -> decl decls .)
+
+
+state 21
+
+    (10) decl -> FUN name . LPAREN formals RPAREN EQUAL exp
+    (15) name -> name . CHARS
+
+    LPAREN          shift and go to state 28
+    CHARS           shift and go to state 8
+
+
+state 22
+
+    (11) decl -> VAL name . EQUAL exp
+    (15) name -> name . CHARS
+
+    EQUAL           shift and go to state 29
+    CHARS           shift and go to state 8
+
+
+state 23
+
+    (2) exp -> name LPAREN actuals RPAREN .
+
+    $end            reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    COMMA           reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    RPAREN          reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    END             reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    FUN             reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    VAL             reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+    IN              reduce using rule 2 (exp -> name LPAREN actuals RPAREN .)
+
+
+state 24
+
+    (7) actuals -> exp COMMA . actuals
+    (6) actuals -> . exp
+    (7) actuals -> . exp COMMA actuals
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 16
+    actuals                        shift and go to state 30
+    name                           shift and go to state 2
+
+state 25
+
+    (3) exp -> TURN LPAREN exp RPAREN .
+
+    $end            reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    COMMA           reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    RPAREN          reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    END             reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    FUN             reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    VAL             reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+    IN              reduce using rule 3 (exp -> TURN LPAREN exp RPAREN .)
+
+
+state 26
+
+    (4) exp -> SEW LPAREN exp COMMA . exp RPAREN
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    exp                            shift and go to state 31
+    name                           shift and go to state 2
+
+state 27
+
+    (5) exp -> LET decls IN exp . END
+
+    END             shift and go to state 32
+
+
+state 28
+
+    (10) decl -> FUN name LPAREN . formals RPAREN EQUAL exp
+    (12) formals -> . name
+    (13) formals -> . name COMMA formals
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 33
+    formals                        shift and go to state 34
+
+state 29
+
+    (11) decl -> VAL name EQUAL . exp
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 2
+    exp                            shift and go to state 35
+
+state 30
+
+    (7) actuals -> exp COMMA actuals .
+
+    RPAREN          reduce using rule 7 (actuals -> exp COMMA actuals .)
+
+
+state 31
+
+    (4) exp -> SEW LPAREN exp COMMA exp . RPAREN
+
+    RPAREN          shift and go to state 36
+
+
+state 32
+
+    (5) exp -> LET decls IN exp END .
+
+    $end            reduce using rule 5 (exp -> LET decls IN exp END .)
+    COMMA           reduce using rule 5 (exp -> LET decls IN exp END .)
+    RPAREN          reduce using rule 5 (exp -> LET decls IN exp END .)
+    END             reduce using rule 5 (exp -> LET decls IN exp END .)
+    FUN             reduce using rule 5 (exp -> LET decls IN exp END .)
+    VAL             reduce using rule 5 (exp -> LET decls IN exp END .)
+    IN              reduce using rule 5 (exp -> LET decls IN exp END .)
+
+
+state 33
+
+    (12) formals -> name .
+    (13) formals -> name . COMMA formals
+    (15) name -> name . CHARS
+
+    RPAREN          reduce using rule 12 (formals -> name .)
+    COMMA           shift and go to state 37
+    CHARS           shift and go to state 8
+
+
+state 34
+
+    (10) decl -> FUN name LPAREN formals . RPAREN EQUAL exp
+
+    RPAREN          shift and go to state 38
+
+
+state 35
+
+    (11) decl -> VAL name EQUAL exp .
+
+    FUN             reduce using rule 11 (decl -> VAL name EQUAL exp .)
+    VAL             reduce using rule 11 (decl -> VAL name EQUAL exp .)
+    IN              reduce using rule 11 (decl -> VAL name EQUAL exp .)
+
+
+state 36
+
+    (4) exp -> SEW LPAREN exp COMMA exp RPAREN .
+
+    $end            reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    COMMA           reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    RPAREN          reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    END             reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    FUN             reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    VAL             reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+    IN              reduce using rule 4 (exp -> SEW LPAREN exp COMMA exp RPAREN .)
+
+
+state 37
+
+    (13) formals -> name COMMA . formals
+    (12) formals -> . name
+    (13) formals -> . name COMMA formals
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 33
+    formals                        shift and go to state 39
+
+state 38
+
+    (10) decl -> FUN name LPAREN formals RPAREN . EQUAL exp
+
+    EQUAL           shift and go to state 40
+
+
+state 39
+
+    (13) formals -> name COMMA formals .
+
+    RPAREN          reduce using rule 13 (formals -> name COMMA formals .)
+
+
+state 40
+
+    (10) decl -> FUN name LPAREN formals RPAREN EQUAL . exp
+    (1) exp -> . name
+    (2) exp -> . name LPAREN actuals RPAREN
+    (3) exp -> . TURN LPAREN exp RPAREN
+    (4) exp -> . SEW LPAREN exp COMMA exp RPAREN
+    (5) exp -> . LET decls IN exp END
+    (14) name -> . CHARS
+    (15) name -> . name CHARS
+
+    TURN            shift and go to state 3
+    SEW             shift and go to state 4
+    LET             shift and go to state 5
+    CHARS           shift and go to state 6
+
+    name                           shift and go to state 2
+    exp                            shift and go to state 41
+
+state 41
+
+    (10) decl -> FUN name LPAREN formals RPAREN EQUAL exp .
+
+    FUN             reduce using rule 10 (decl -> FUN name LPAREN formals RPAREN EQUAL exp .)
+    VAL             reduce using rule 10 (decl -> FUN name LPAREN formals RPAREN EQUAL exp .)
+    IN              reduce using rule 10 (decl -> FUN name LPAREN formals RPAREN EQUAL exp .)
+
